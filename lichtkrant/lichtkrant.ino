@@ -188,6 +188,7 @@ static int build_textline(int argc, char *argv[], char *line)
 
 static int do_text(int argc, char *argv[])
 {
+    draw_fill({0, 0});
     int res = build_textline(argc, argv, textline);
     if (res >= 0) {
         draw_text(textline, 0, {255, 0}, {0, 0});
@@ -201,6 +202,7 @@ static unsigned long scroll_tick = 0;
 
 static int do_scroll(int argc, char *argv[])
 {
+    draw_fill({0, 0});
     int res = build_textline(argc, argv, textline);
     if (res >= 0) {
         scroll_pos = 80;
@@ -294,7 +296,6 @@ void setup(void)
 
     wifiManager.autoConnect(esp_id);
     draw_text_ext(WiFi.localIP().toString().c_str(), 0, shade_rasta_vertical, {0, 0});
-
     udpServer.begin(RGB565_UDP_PORT);
     MDNS.begin(esp_id);
     MDNS.addService("rgb565", "udp", RGB565_UDP_PORT);
